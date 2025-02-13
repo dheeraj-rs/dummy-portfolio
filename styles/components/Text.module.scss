@@ -1,0 +1,72 @@
+// Text.module.scss
+
+// Variables
+$font-primary: var(--font-secondary);
+$font-secondary: var(--font-secondary);
+
+// Font Sizes
+$font-sizes: (
+  small: 12px,
+  medium: calc(.2vw + 12px),
+  normal: 18px,
+  large: calc(.4vw + 14px),
+  xl: clamp(20px, 4vw, 50px),
+  xxl: clamp(40px, 7vw, 100px)
+);
+
+// Font Weights
+$font-weights: (
+  thin: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800
+);
+
+// Mixin for text styles
+@mixin text-style($fontSize, $fontWeight, $color, $opacity, $primaryFont, $secondaryFont) {
+  z-index: 10;
+  font-smooth: auto;
+  -webkit-font-smoothing: auto;
+  font-size: map-get($font-sizes, $fontSize);
+  font-weight: map-get($font-weights, $fontWeight);
+  color: $color;
+  opacity: $opacity;
+
+  @if $primaryFont {
+    font-family: $font-primary;
+  }
+
+  @if $secondaryFont {
+    font-family: $font-secondary;
+  }
+}
+
+// Default text styles
+.text {
+  @include text-style(normal, regular, inherit, 1, false, false);
+}
+
+// Variations
+.text-primary {
+  font-family: $font-primary;
+}
+
+.text-secondary {
+  font-family: $font-secondary;
+}
+
+// Heading styles
+.text-h1 {
+  @include text-style(xl, bold, inherit, 1, true, false);
+}
+
+.text-h2 {
+  @include text-style(large, semibold, inherit, 1, true, false);
+}
+
+.text-h3 {
+  @include text-style(normal, medium, inherit, 1, false, true);
+}

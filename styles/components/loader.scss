@@ -1,0 +1,11 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__logo {
+    height: 8rem;
+    max-width: 50px;
+  }
+} 

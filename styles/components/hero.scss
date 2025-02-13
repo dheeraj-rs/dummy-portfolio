@@ -1,0 +1,27 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--theme-background-color);
+  max-width: 100vw;
+  height: 100vh;
+  padding: 0px 10vw;
+
+  &__gradient-background {
+    position: absolute;
+    width: 50vw;
+    filter: blur(60px);
+    transform: translate(30px, -30px);
+  }
+
+  &__company-link {
+    color: var(--theme-text-color-2);
+    text-decoration: none;
+  }
+
+  &__keyboard-image {
+    max-width: 30vw;
+    object-fit: contain;
+  }
+  
+} 

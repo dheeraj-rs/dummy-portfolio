@@ -1,0 +1,146 @@
+// Variables
+$align-items: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  stretch: stretch,
+  baseline: baseline
+);
+
+$justify-content: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  evenly: space-evenly
+);
+
+// Mixins
+@mixin flex-container {
+  display: flex;
+}
+
+@mixin flex-value($value) {
+  flex: $value;
+}
+
+@mixin alignment($align: center) {
+  @if map-has-key($align-items, $align) {
+    align-items: map-get($align-items, $align);
+  } @else {
+    align-items: $align;
+  }
+}
+
+@mixin justification($justify: center) {
+  @if map-has-key($justify-content, $justify) {
+    justify-content: map-get($justify-content, $justify);
+  } @else {
+    justify-content: $justify;
+  }
+}
+
+@mixin direction($direction) {
+  flex-direction: $direction;
+}
+
+@mixin spacing($type, $value) {
+  #{$type}: $value;
+}
+
+// Main Container Class
+.container {
+  @include flex-container;
+  @include alignment;
+  @include justification;
+  
+  // Default styles
+  padding: 0px;
+  margin: 0px;
+  width: auto;
+  height: auto;
+  
+  // Flex
+  &[data-flex] {
+    @include flex-value(attr(data-flex));
+  }
+  
+  // Direction variants
+  &--row {
+    @include direction(row);
+  }
+  
+  &--column {
+    @include direction(column);
+  }
+  
+  // Spacing
+  &[data-padding] {
+    padding: attr(data-padding);
+  }
+  
+  &[data-margin] {
+    margin: attr(data-margin);
+  }
+  
+  // Dimensions
+  &[data-width] {
+    width: attr(data-width);
+  }
+  
+  &[data-height] {
+    height: attr(data-height);
+  }
+  
+  &--full-width {
+   min-width: min-content !important;
+  }
+  
+  &--full-height {
+    height: 100% !important;
+  }
+  
+  // Custom alignment
+  &[data-align] {
+    @include alignment(attr(data-align));
+  }
+  
+  &[data-justify] {
+    @include justification(attr(data-justify));
+  }
+  
+  // Background color - using CSS variables directly
+  &[data-bg-color] {
+    background-color: var(--bg-#{attr(data-bg-color)});
+  }
+  
+  // Theme-based alignment classes
+  @each $align-name, $align-value in $align-items {
+    &--align-#{$align-name} {
+      align-items: $align-value;
+    }
+  }
+  
+  @each $justify-name, $justify-value in $justify-content {
+    &--justify-#{$justify-name} {
+      justify-content: $justify-value;
+    }
+  }
+}
+
+// Theme fallback classes
+.container-theme {
+  &--default {
+    @extend .container;
+  }
+  
+  &--flex {
+    display: flex;
+  }
+  
+  &--centered {
+    @include alignment(center);
+    @include justification(center);
+  }
+}

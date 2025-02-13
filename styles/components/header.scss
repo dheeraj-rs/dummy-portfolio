@@ -1,0 +1,40 @@
+.header {
+  position: fixed;
+  max-width: 100vw;
+  width: 100%;
+  background: var(--theme-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+  }
+
+  &__name {
+    color: var(--theme-text-color-1);
+    font-size: calc(.2vw + 12px);
+  }
+
+  &__link {
+    font-size: calc(.2vw + 12px);
+    color: var(--theme-text-color-1);
+    font-weight: 300;
+    margin-right: 3vw;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &--semibold {
+      font-weight: 600;
+    }
+  }
+} 
